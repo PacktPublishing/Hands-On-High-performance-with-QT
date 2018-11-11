@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>546</width>
+    <height>412</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Test SvgCache</string>
+  </property>
+  <property name="animated">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="MySvgWidget" name="svgWidget" native="true"/>
+    </item>
+    <item row="0" column="1">
+     <widget class="MySvgWidget" name="svgWidget_2" native="true"/>
+    </item>
+    <item row="0" column="2">
+     <widget class="MySvgWidget" name="svgWidget_3" native="true"/>
+    </item>
+    <item row="0" column="3">
+     <widget class="MySvgWidget" name="svgWidget_4" native="true"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="MySvgWidget" name="svgWidget_5" native="true"/>
+    </item>
+    <item row="1" column="1">
+     <widget class="MySvgWidget" name="svgWidget_6" native="true"/>
+    </item>
+    <item row="1" column="2">
+     <widget class="MySvgWidget" name="svgWidget_7" native="true"/>
+    </item>
+    <item row="1" column="3">
+     <widget class="MySvgWidget" name="svgWidget_8" native="true"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="MySvgWidget" name="svgWidget_9" native="true"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="MySvgWidget" name="svgWidget_10" native="true"/>
+    </item>
+    <item row="2" column="2">
+     <widget class="MySvgWidget" name="svgWidget_11" native="true"/>
+    </item>
+    <item row="2" column="3">
+     <widget class="MySvgWidget" name="svgWidget_12" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>546</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuExit">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionQuit"/>
+   </widget>
+   <addaction name="menuExit"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MySvgWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">svgcache.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionQuit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
