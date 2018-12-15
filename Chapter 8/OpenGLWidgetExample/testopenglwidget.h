@@ -5,6 +5,10 @@
 #include <QOpenGLFunctions>
 
 
+/**
+ * @brief
+ *  Paints a sipmlest OpenGL triangle, uses oldskool v.1.0 API, for demonstration only!
+ */
 class TestOpenGLWidget
         : public QOpenGLWidget, protected QOpenGLFunctions
 {

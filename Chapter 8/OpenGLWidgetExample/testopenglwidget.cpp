@@ -6,7 +6,6 @@ TestOpenGLWidget::TestOpenGLWidget(QWidget* parent)
 {
 }
 
-
 void TestOpenGLWidget::initializeGL()
 {
     initializeOpenGLFunctions();
