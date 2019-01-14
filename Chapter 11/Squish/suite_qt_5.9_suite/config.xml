@@ -1,0 +1,9 @@
+<testconfig version="1.0">
+<information>
+<summary/>
+<description/>
+</information>
+<testsettings>
+<waitForObjectTimeout>40000</waitForObjectTimeout>
+</testsettings>
+</testconfig>
