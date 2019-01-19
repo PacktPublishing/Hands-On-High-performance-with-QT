@@ -1,23 +1,20 @@
 #include "framebuffertriangle.h"
 
-
 #include <QQuickWindow>
 #include <QOpenGLFramebufferObject>
 #include <QOpenGLFramebufferObjectFormat>
 
-#include <QOpenGLContext>
+#include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions>
 
-#include <QOpenGLVertexArrayObject>
-#include <QOpenGLBuffer>
-#include <QVector3D>
-#include <QOpenGLFunctions>
 
-#include <QAbstractOpenGLFunctions>
+// TEST support - using OpenGL 1.1
+//#define USE_OLD_OPENGL_API
 
 
-
-class FrameBufferTriangleRenderer : public QQuickFramebufferObject::Renderer
+class FrameBufferTriangleRenderer
+        : public QQuickFramebufferObject::Renderer,
+          protected QOpenGLFunctions
 {
 public:
     FrameBufferTriangleRenderer();
@@ -28,57 +25,67 @@ public:
 
 private:
     QQuickWindow* window_;
-    QScopedPointer<QOpenGLVertexArrayObject> vao_;
-    QScopedPointer<QOpenGLBuffer> vertexArray_;
-
-
+    QScopedPointer<QOpenGLShaderProgram> shader_;
+    uint positionAttr_;
+    uint colorAttr_;
+    int matrixAttr_;
 };
 
 
-
 FrameBufferTriangle::FrameBufferTriangle(QQuickItem* parent)
+    : QQuickFramebufferObject(parent)
 {
-
 }
+
 
 auto FrameBufferTriangle::createRenderer() const -> Renderer*
 {
-
-}
-
-
-FrameBufferTriangleRenderer::FrameBufferTriangleRenderer()
-{
-//    // Create a colored triangle
-//    static const QVector3D triVertexes[] =
-//    {
-//      QVector3D( 0.00f,  0.75f, 1.0f),
-//      QVector3D( 0.75f, -0.75f, 1.0f),
-//      QVector3D(-0.75f, -0.75f, 1.0f)
-//    };
-//    static const QVector3D triVertexColors[] =
-//    {
-//      QVector3D(1.0f, 0.0f, 0.0f),
-//      QVector3D(0.0f, 1.0f, 0.0f),
-//      QVector3D(0.0f, 0.0f, 1.0f)
-//    };
-
-
-
-//    if (!vao_->create())
-//    {
-//        qFatal("Unable to create VAO");
-//    }
-
-//    vao_->bind();
-
-
-
-//    vao_->release();
+    return new FrameBufferTriangleRenderer();
 }
 
 
 // impl. of a renderer
+
+FrameBufferTriangleRenderer::FrameBufferTriangleRenderer()
+    : shader_(new QOpenGLShaderProgram),
+      positionAttr_((unsigned)-1),
+      colorAttr_((unsigned)-1),
+      matrixAttr_(-1)
+{
+    initializeOpenGLFunctions();
+
+    //glClearColor(0.1f, 0.1f, 0.2f, 1.0f); // opaque
+    glClearColor(0.1f, 0.1f, 0.2f, 0.0f); // transparent
+
+#ifndef USE_OLD_OPENGL_API
+    // use OpenGl 2.0
+
+    // just the default shaders:
+    const char *vertexShaderSrc =
+        "attribute highp vec4 posAttr;\n"
+        "attribute lowp vec4 colAttr;\n"
+        "varying lowp vec4 col;\n"
+        "uniform highp mat4 matrix;\n"
+        "void main() {\n"
+        "   col = colAttr;\n"
+        "   gl_Position = matrix * posAttr;\n"
+        "}\n";
+
+    const char *fragmentShaderSrc =
+        "varying lowp vec4 col;\n"
+        "void main() {\n"
+        "   gl_FragColor = col;\n"
+        "}\n";
+
+    shader_->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSrc);
+    shader_->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSrc);
+    shader_->link();
+    positionAttr_ = shader_->attributeLocation("posAttr");
+    colorAttr_ = shader_->attributeLocation("colAttr");
+    matrixAttr_ = shader_->uniformLocation("matrix");
+#endif
+}
+
 
 void FrameBufferTriangleRenderer::synchronize(QQuickFramebufferObject *item)
 {
@@ -86,45 +93,68 @@ void FrameBufferTriangleRenderer::synchronize(QQuickFramebufferObject *item)
 
     FrameBufferTriangle* obj = static_cast<FrameBufferTriangle*>(item);
     Q_UNUSED(obj);
+
+    // sync values ...
 }
 
 
 void FrameBufferTriangleRenderer::render()
 {
-    //QOpenGLFunctions* f = QOpenGLContext::currentContext()->functions();
-
-    QOpenGLFunctions_1_0* f = context->versionFunctions<QOpenGLFunctions_1_0>();
-
+#ifdef USE_OLD_OPENGL_API
     float relSize = 0.8f;
 
-    // we use OpenGL functions directly
+    // we use OpenGL 1.0 functions directly
     //  - set QT_OPENGL to desktop if it's not working
-    f->glClearColor(1,1,1,0); // white
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    f->glCQOpenGLFunctionslear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBegin(GL_TRIANGLES);
 
-    f->glBegin(GL_TRIANGLES);
+    glColor3f(1.0, 0.0, 0.0); // red
+    glVertex3f(-relSize, -relSize, 0);
+    glColor3f(0.0, 1.0, 0.0); // green
+    glVertex3f(relSize, -relSize, 0);
+    glColor3f(0.0, 0.0, 1.0); // blue
+    glVertex3f(0.0, relSize, 0);
 
-    f->glColor3f(1.0, 0.0, 0.0); // red
-    f->glVertex3f(-relSize, -relSize, 0);
-    f->glColor3f(0.0, 1.0, 0.0); // green
-    f->glVertex3f(relSize, -relSize, 0);
-    f->glColor3f(0.0, 0.0, 1.0); // blue
-    f->glVertex3f(0.0, relSize, 0);
+    glEnd();
+#else
+    // use OpenGl 2.0
+    glClear(GL_COLOR_BUFFER_BIT);
 
-    f->glEnd();
+    shader_->bind();
 
-    //    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    QMatrix4x4 matrix;
+    matrix.perspective(90.0f, 1.0f, 0.1f, 100.0f);
+    matrix.translate(0, 0, -1);
 
+    shader_->setUniformValue(matrixAttr_, matrix);
 
+    float relSize = 0.8f;
+    GLfloat vertices[] = {
+        -relSize, -relSize, 0.0f,
+        relSize, -relSize, 0.0f,
+        0.0f, relSize, 0.0f
+    };
 
-//    m_render.render();
+    GLfloat colors[] = {
+        1.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        0.0f, 0.0f, 1.0f
+    };
 
-//    vao_->bind();
-//    functions->glDrawElements(GL_TRIANGLES, m_indicesCount, GL_UNSIGNED_INT, Q_NULLPTR);
-//    vao_->release();
+    glVertexAttribPointer(positionAttr_, 3, GL_FLOAT, GL_FALSE, 0, vertices);
+    glVertexAttribPointer(colorAttr_, 3, GL_FLOAT, GL_FALSE, 0, colors);
 
-//    window_->resetOpenGLState();
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(0);
+
+    shader_->release();
+#endif
 }
 
 

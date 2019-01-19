@@ -1,4 +1,4 @@
-QT += quick
+QT += quick opengl
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -37,3 +37,5 @@ HEADERS += \
     painteditemtriangle.h \
     quickitemtriangle.h \
     framebuffertriangle.h
+
+win32: LIBS += -lopengl32
