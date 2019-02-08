@@ -1,5 +1,5 @@
 
-# Hands-On High performance with QT
+# Hands-On High Performance Programming with QT 5
 
 <a href="https://www.packtpub.com/application-development/hands-high-performance-programming-qt-5?utm_source=github&utm_medium=repository&utm_campaign=9781789531244 "><img src="https://d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/B11480_New1.png" alt="Hands-On High Performance Programming with Qt 5" height="256px" align="right"></a>
 
