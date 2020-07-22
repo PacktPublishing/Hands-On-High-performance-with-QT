@@ -1,0 +1,21 @@
+{"traceEvents":[
+{"cat":"","pid":40796,"tid":19780,"ts":12,"ph":"M","name":"process_name","args":{"name":"QmlWithModel"}},
+{"cat":"","pid":40796,"tid":19780,"ts":14,"ph":"M","name":"thread_name","args":{"name":"Main GUI tread"}},
+{"cat":"main","pid":40796,"tid":19780,"ts":15,"ph":"B","name":"main()","args":{}},
+{"cat":"main","pid":40796,"tid":19780,"ts":27840,"ph":"B","name":"load QML View","args":{}},
+{"cat":"main","pid":40796,"tid":19780,"ts":668693,"ph":"E","name":"load QML View","args":{}},
+{"cat":"main","pid":40796,"tid":19780,"ts":668694,"ph":"B","name":"init NetworkMgr","args":{}},
+{"cat":"main","pid":40796,"tid":19780,"ts":686069,"ph":"E","name":"init NetworkMgr","args":{}},
+{"cat":"../QmlWithModelTraced/main.cpp","pid":40796,"tid":19780,"ts":686086,"ph":"X","name":"wasteCpuCycles","args":{},"dur":67231},
+{"cat":"../QmlWithModelTraced/main.cpp","pid":40796,"tid":19780,"ts":753317,"ph":"X","name":"wasteMemory","args":{},"dur":53804},
+{"cat":"main","pid":40796,"tid":19780,"ts":807123,"ph":"I","name":"start event loop","args":{}},
+{"cat":"../QmlWithModelTraced/main.cpp","pid":40796,"tid":19780,"ts":808146,"ph":"X","name":"wasteCpuCycles","args":{},"dur":66930},
+{"cat":"../QmlWithModelTraced/main.cpp","pid":40796,"tid":19780,"ts":885228,"ph":"X","name":"wasteCpuCycles","args":{},"dur":67996},
+{"cat":"lambda","pid":40796,"tid":19780,"ts":808069,"ph":"X","name":"networkRequest","args":{},"dur":145159},
+{"cat":"../QmlWithModelTraced/main.cpp","pid":40796,"tid":19780,"ts":1444663,"ph":"X","name":"wasteCpuCycles","args":{},"dur":68617},
+{"cat":"../QmlWithModelTraced/main.cpp","pid":40796,"tid":19780,"ts":1513283,"ph":"X","name":"wasteCpuCycles","args":{},"dur":68123},
+{"cat":"../QmlWithModelTraced/main.cpp","pid":40796,"tid":19780,"ts":1588653,"ph":"X","name":"wasteCpuCycles","args":{},"dur":68520},
+{"cat":"lambda","pid":40796,"tid":19780,"ts":1444662,"ph":"X","name":"networkResponse","args":{},"dur":212512},
+{"cat":"main","pid":40796,"tid":19780,"ts":2029717,"ph":"I","name":"exiting","args":{}},
+{"cat":"main","pid":40796,"tid":19780,"ts":2029717,"ph":"E","name":"main()","args":{}}
+]}
