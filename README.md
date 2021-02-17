@@ -1,7 +1,7 @@
 
 # Hands-On High Performance Programming with Qt 5
 
-<a href="https://www.packtpub.com/application-development/hands-high-performance-programming-qt-5?utm_source=github&utm_medium=repository&utm_campaign=9781789531244 "><img src="https://d1ldz4te4covpm.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/B11480_New1.png" alt="Hands-On High Performance Programming with Qt 5" height="256px" align="right"></a>
+<a href="https://www.packtpub.com/application-development/hands-high-performance-programming-qt-5?utm_source=github&utm_medium=repository&utm_campaign=9781789531244 "><img src="cover_frontside.jpg" alt="Hands-On High Performance Programming with Qt 5" height="256px" align="right"></a>
 
 This is the code repository for [Hands-On High Performance Programming with Qt 5](https://www.packtpub.com/application-development/hands-high-performance-programming-qt-5?utm_source=github&utm_medium=repository&utm_campaign=9781789531244 ), published by Packt.
 
@@ -11,13 +11,13 @@ This is the code repository for [Hands-On High Performance Programming with Qt 5
 Efficient code achieved through performance tuning is one of the key challenges faced by many programmers. This book looks at Qt programming from a performance perspective. We will look at the performance problems encountered when using the Qt platforms and means and ways to nullify it and optimize performance.
 
 This book covers the following exciting features:
-Understand of classic performance wisdom 
-Get to grips with modern HW architectures and their performance impact 
-To implement tools and procedures used in performance optimization 
-Grasp Qt-specific work techniques for GUI and platform programming 
-Performant usage of TCP and HTTP and the relevant Qt classes 
-Learn about improvements Qt 5.9 (and later) has in store for us 
-Plan of Qt’s architecture, strengths and weaknesses of graphics engines 
+ - Understand of classic performance wisdom 
+ - Get to grips with modern HW architectures and their performance impact 
+ - To implement tools and procedures used in performance optimization 
+ - Grasp Qt-specific work techniques for GUI and platform programming 
+ - Performant usage of TCP and HTTP and the relevant Qt classes 
+ - Learn about improvements Qt 5.9 (and later) has in store for us 
+ - Plan of Qt’s architecture, strengths and weaknesses of graphics engines 
 
 If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1789531241) today!
 

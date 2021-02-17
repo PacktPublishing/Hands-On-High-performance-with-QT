@@ -1,0 +1,118 @@
+Microsoft Windows [Version 10.0.18363.1256]
+(c) 2019 Microsoft Corporation. Alle Rechte vorbehalten.
+
+H:\>c:
+
+C:\>cd C:\Users\x1mkraje\source\repos\Github\heob
+
+C:\Users\x1mkraje\source\repos\Github\heob>heob32.exe -HH
+Usage: heob32 [OPTION]... APP [APP-OPTION]...
+       heob32 [OPTION]... CRASH.DMP [SYMBOL-PATH]
+
+    -AX    attach to thread
+    -oX    heob output [1]  │  file format specifiers
+              0 = none      │    %p = PID (enables child process injection)
+              1 = stdout    │    %n = name
+              2 = stderr    │    %P = parent PID
+              ... = file    │    %N = parent name
+    -xX    xml output       │    %c = counter (enables child process injection)
+    -vX    svg output       │
+    -yX    symbol path
+    -PX    show process ID and wait [0]
+    -cX    create new console [0]
+              0 = none
+              1 = target application
+              2 = heob
+              3 = target application and heob
+    -wX    forward startup info and inheritable handles [0]
+    -TX    disable parallel dll loading [0]
+    -pX    page protection [1]
+              0 = off
+              1 = after
+              2 = before
+    -fX    freed memory protection [0]
+    -dX    monitor dlls [3]
+              0 = off
+              1 = static
+              2 = static and dynamic (never free)
+              3 = static and dynamic (free on end)
+              4 = static and dynamic (leak detection after dll unload)
+    -aX    alignment [8]
+    -MX    minimum page protection size [1]
+    -iX    initial value [255]
+              1   = 0x0101010101010101
+    -iV:S  initial value with stride
+              1:2 = 0x0001000100010001
+              1:4 = 0x0000000100000001
+              1:8 = 0x0000000000000001
+    -sX    initial value for slack (-1 = off) [-1]
+    -hX    handle exceptions [1]
+              0 = off
+              1 = on
+              2 = only
+    -RX    raise breakpoint exception on allocation # [0]
+    -rX    raise breakpoint exception on error [0]
+              0 = off
+              1 = on
+              2 = on, mismatching allocation/release method
+    -DX    show exception details [0]
+             -2 = write minidump
+             -1 = write minidump with full memory
+              0 = none
+             |1 = registers
+             |2 = assembly instruction
+             |4 = modules
+             |8 = all threads
+    -SX    use stack pointer in exception [0]
+    -mX    compare allocation/release method [0]
+              0 = off
+              1 = on
+              2 = on, compare delete/delete[]
+    -nX    find nearest allocation [1]
+    -gX    group identical leaks [1]
+              0 = off
+              1 = on
+              2 = on, merge common stack frames
+              3 = sort by thread and time
+    -FX    show full path [0]
+    -lX    show leak details [1]
+              0 = none
+              1 = simple
+              2 = detect leak types
+              3 = detect leak types (show reachable)
+              4 = fuzzy detect leak types
+              5 = fuzzy detect leak types (show reachable)
+    -zX    minimum leak size [0]
+    -kX    control leak recording [0]
+              0 = off
+              1 = on (start disabled)
+              2 = on (start enabled)
+    -GX    use global hotkeys to control leak recording [0]
+              Ctrl+Alt+F = off
+              Ctrl+Alt+D = on
+              Ctrl+Alt+C = clear
+              Ctrl+Alt+S = show
+    -LX    show leak contents [0]
+    -CX    show source code [0]
+    -eX    show exit trace [0]
+    -EX    use leak and error count for exit code [0]
+              0 = off
+              1 = on
+              2 = on, only keep output files with leaks or errors
+    -IX    sampling profiler interval [0]
+             <0 = only main thread
+              0 = off
+             >0 = all threads
+    -OA:O; application specific options
+    -X     disable heob via application specific options
+    -"M"B  trace mode: load module on base address
+    -H[H]  show full help
+
+heap-observer vc-dev (32bit)
+
+
+####
+
+ # to get only flage graph for the sampling profile: <heob> -l0 -I2 -vout.svg
+
+####
